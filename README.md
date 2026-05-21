@@ -17,13 +17,13 @@
 
 ## 📅 3-Week Project Timeline & Deliverables
 
-### 🛠️ Week 1: Data Gathering, Integration & Preprocessing
-* **목표:** NCBI GEO에서 가공된 텍스트 데이터를 다운로드하고, 머신러닝 학습을 위한 마스터 테이블(Master Dataframe)을 구축합니다.
+### 🛠️ Week 1: Data Alignment & Master Feature Table Construction
+* **목표:** 기존 실습 환경에 준비된 전처리 데이터(`read-count.txt` 및 CLIP-seq 파일)를 로드하고, 이를 유전자 서열 데이터와 결합하여 머신러닝 학습을 위한 통합 마스터 테이블(Master Dataframe)을 구축합니다.
 * **주요 세부 과제:**
-  1. GSE37114의 Supplementary files 중 RNA-seq, Ribo-seq, CLIP-seq 텍스트 파일 수집
-  2. Pandas를 이용해 유전자 이름(Gene Symbol) 기준으로 데이터 병합(`Merge`) 및 결측치 처리
-  3. Gene Ontology 데이터 또는 키워드 매칭을 통해 면역(Immune), 세포막(Membrane) 유전자군 분리 및 라벨링 (`is_immune` 열 생성)
-  4. Biopython 등을 활용하여 유전자별 서열 데이터 확보 및 기초 특성(GC 비율, `GGAG` 모티프 개수) 계산 및 통합
+  1. **로컬 데이터 로드:** `read-count.txt` 파일을 Pandas로 읽어 들여 유전자별 RNA-seq 및 Ribo-seq 카운트 데이터 구조 파악
+  2. **번역 효율(TE) 산출:** 전사량(RNA) 대비 실제 번역량(Ribo)의 비율을 계산하여 LIN28A Knockdown 시 번역 변화량($\Delta$TE) 도출
+  3. **면역/세포막 타겟 라벨링:** 유전자 이름(Gene Symbol) 매칭 혹은 키워드 필터링을 통해 면역(Immune) 및 세포막(Membrane) 유전자군을 분류하고 목적 변수(`is_immune`, `is_target`) 생성
+  4. **서열 기반 피처 엔지니어링:** `lin28a-clip-seq.pileup` 데이터와 유전자 서열을 연동하여, 유전자별 기초 서열 특성(GC 비율, `GGAG` 결합 모티프 개수)을 계산하고 표에 결합
 * **Commit Artifacts:** `data_preprocessing.ipynb`, `processed_master_table.csv`
 
 ### 📊 Week 2: Exploratory Data Analysis & Multidimensional Visualization
